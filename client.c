@@ -10,23 +10,6 @@
 #define PORT     8080
 #define MAXLINE 1024
   
-int setText(unsigned int file, char *text) {
-	i2c_smbus_write_byte_data(file, 0x00, 0x28);
-	i2c_smbus_write_byte_data(file, 0x00, 0x0D);
-	i2c_smbus_write_byte_data(file, 0x00, 0x01);
-	i2c_smbus_write_byte_data(file, 0x00, 0x06);
-	i2c_smbus_write_byte_data(file, 0x00, 0x02);
-
-	i2c_smbus_write_byte_data(file, 0x00, 0x80);
-	for(int i = 0; ; i++) {
-		if(text[i] == 0x00)
-			break;
-		if (i == 15)
-			i2c_smbus_write_byte_data(file, 0x00, 0xc0);
-		i2c_smbus_write_byte_data(file, 0x40, text[i]);
-	}
-}
-
 // Driver code
 int main() {
     int sockfd;
