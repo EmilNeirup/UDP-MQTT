@@ -10,7 +10,7 @@
 #define PORT     8080
 #define MAXLINE 1024
   
-// Driver code
+//  Driver code
 int main() {
     int sockfd;
     char buffer[MAXLINE];
