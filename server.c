@@ -47,6 +47,12 @@ int main() {
                 MSG_WAITALL, ( struct sockaddr *) &cliaddr,
                 &len);
     buffer[n] = '\0';
+
+    // Lav buffer om til MQTT og send til "Display"
+    char command[60];
+    strcpy(command, ("mosquitto_pub -h 192.168.150.57 -t \"topic\" -m \"%s\", buffer"));
+    system(command);
+
     printf("Client : %s\n", buffer);
     sendto(sockfd, (const char *)hello, strlen(hello), 
         MSG_CONFIRM, (const struct sockaddr *) &cliaddr,

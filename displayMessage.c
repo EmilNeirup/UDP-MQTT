@@ -153,7 +153,7 @@
                 mosquitto_connect_callback_set(mosq1, on_connect1);
                 mosquitto_message_callback_set(mosq1, on_message1);
 
-                mosquitto_connect(mosq1, "alabanan.dk", 1883, 60);  // NOTE:  Replace localhost with IP address of broker
+                mosquitto_connect(mosq1, "192.168.150.73", 1883, 60);  // NOTE:  Replace localhost with IP address of broker
 
 
                 mosquitto_loop_forever(mosq1, -1, 1);
