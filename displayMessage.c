@@ -132,17 +132,6 @@
         }
 
         int main( void ) {
-                char revision; //To store MCP9808 revision ID - Perhaps useful in the future
-                char buf[32];
-                int32_t reg32;
-                uint16_t * const reg16poi = (uint16_t *) &reg32; //Address reg32 wordwise
-                uint8_t  * const reg8poi  = (uint8_t *)  &reg32; //Address reg32 bytewise
-                int file1;
-                file1 = i2c_init(MPC9808_BUS, 0x3e);
-                i2c_smbus_write_byte_data(file1, 0x00, 0x28); //2 line mode
-                i2c_smbus_write_byte_data(file1, 0x00, 0x01); //clear display
-                i2c_smbus_write_byte_data(file1, 0x00, 0x06); //entry mode
-                close(file1);
                 struct mosquitto *mosq1;
                 int version[3];
 
