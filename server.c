@@ -46,7 +46,7 @@ int main() {
 
     // Lav buffer om til MQTT og send til "Display"
     char command[255];
-    sprintf(command, "mosquitto_pub -h 192.168.150.57 -t 'topic' -m '%s'", buffer);
+    sprintf(command, "mosquitto_pub -h 192.168.150.73 -t 'topic' -m '%s'", buffer);
     printf(command);
     system(command);
 
