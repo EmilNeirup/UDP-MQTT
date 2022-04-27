@@ -10,31 +10,32 @@
 #define PORT     8080
 #define MAXLINE 1024
   
-//  Driver code
+//  Driver kode
 int main() {
     int sockfd;
     char buffer[MAXLINE];
     char *hello = "Hello from client - revisor ulle";
-    struct sockaddr_in     servaddr;
+    struct sockaddr_in     servaddr; //Vigtigt! håndterer syscalls og functioner til internet address 
    
-    // Creating socket file descriptor
+    // Laver socket file descriptor med params: domain, type, protokol (0 er default)
     if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
-        perror("socket creation failed");
+        perror("Can't create socket");
         exit(EXIT_FAILURE);
     }
    
     memset(&servaddr, 0, sizeof(servaddr));
        
-    // Filling server information
-    servaddr.sin_family = AF_INET;
-    servaddr.sin_port = htons(PORT);
-    servaddr.sin_addr.s_addr = INADDR_ANY;
+    // Indsætter server information
+    servaddr.sin_family = AF_INET; // IPv4
+    servaddr.sin_addr.s_addr = INADDR_ANY; // Lytter på alle tilgængelige interfaces
+    servaddr.sin_port = htons(PORT); // Sætter porten - htons konverterer til network byte order
        
     int n, len;
        
     sendto(sockfd, (const char *)hello, strlen(hello), MSG_CONFIRM, (const struct sockaddr *) &servaddr, sizeof(servaddr));
     printf("Hello message sent.\n");
-           
+
+    // Modtager fra server       
     n = recvfrom(sockfd, (char *)buffer, MAXLINE, MSG_WAITALL, (struct sockaddr *) &servaddr, &len);
     buffer[n] = '\0';
     printf("Server : %s\n", buffer);
