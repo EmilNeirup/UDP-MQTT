@@ -23,16 +23,16 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
-    //Sætter servaddr og cliaddr i memory til 0
+    // Sætter servaddr og cliaddr i memory til 0
     memset(&servaddr, 0, sizeof(servaddr));
     memset(&cliaddr, 0, sizeof(cliaddr));
        
     // Indsætter server information
     servaddr.sin_family = AF_INET; // IPv4
     servaddr.sin_addr.s_addr = INADDR_ANY; //Lytter på alle tilgængelige interfaces
-    servaddr.sin_port = htons(PORT); //Sætter porten - htons konverterer til network byte order
+    servaddr.sin_port = htons(PORT); // Sætter porten - htons konverterer til network byte order
        
-    // Tilføjer sevrer addressen til socket
+    // Tilføjer srver addressen til socket
     if ( bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr)) < 0 ) {
         perror("Can't bind address to socket");
         exit(EXIT_FAILURE);
@@ -40,7 +40,7 @@ int main() {
        
     int len, n;
    
-    len = sizeof(cliaddr);  //len er value/result
+    len = sizeof(cliaddr); // len er value/result
    
     n = recvfrom(sockfd, (char *)buffer, MAXLINE, MSG_WAITALL, ( struct sockaddr *) &cliaddr, &len);
     buffer[n] = '\0';
